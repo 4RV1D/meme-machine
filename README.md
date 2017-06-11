@@ -1,5 +1,7 @@
 # Meme Machine
 
+![alt text](http://i.imgur.com/zty9EMI.jpg)
+
 The bot called Meme machine is a PHP script that scans facebook feeds for posts every 30 minutes.
 After scanning all the facebook pages added it puts every picture and message into a database.
 
