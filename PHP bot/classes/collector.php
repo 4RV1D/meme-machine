@@ -103,7 +103,7 @@ class Collector
 
   }
 
-  function getMemes($url) {
+  function checkError($url) {
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -114,10 +114,21 @@ class Collector
     $memes = (json_decode($result, true));
 
     if (isset($memes["error"])) {
-      return $memes["error"];
-    } else {
-      return $memes["data"];
+      return $memes["error"]["message"];
     }
+  }
+
+  function getMemes($url) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_URL,$url);
+    $result=curl_exec($ch);
+    curl_close($ch);
+
+    $memes = (json_decode($result, true));
+
+    return $memes["data"];
   }
 
   function buildInsert($table, $array) {

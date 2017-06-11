@@ -3,7 +3,7 @@
 		var settings = $.extend({
 			loading_gif_url	: "ajax-loader.gif", //url to loading gif
 			end_record_text	: 'No more records found!', //no more records to load
-			data_url 		: 'fetch_pages.php', //url to PHP page
+			data_url 		: 'getPosts.php', //url to PHP page
 			start_page 		: 1 //initial page
 		}, options);
 

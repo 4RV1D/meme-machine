@@ -1,15 +1,15 @@
 <?php
 
-  include "collector.php";
+  include "classes/collector.php";
 
-  $limit = "100";
+  $limit = "20";
 
   $memePages = array(
     'DankestMemesNoice',
     'keepitvague',
     'painwave',
     'ocfreshstolenmemes2',
-    'shitpostbot'
+    'shitpostbot5k'
   );
 
   while (true) {
@@ -28,11 +28,11 @@
         Get's the information needed from one memePage
         created and generated to grab and store all memes.
       ------------------------------------------------------*/
-      if ($Collector->getUrl() == false) {                                      // Creates the graph Api url to use with Curl
-        echo "Error: " . $Collector->getUrl() . "\n";
+      $url = $Collector->getUrl();                                              // Creates the graph Api url to use with Curl
+
+      if ($Collector->checkError($url) !== NULL) {                              // Checks if the Error array in the API is set
+        echo "Error: " . $Collector->checkError($url) . "\n";
         continue;
-      } else {
-        $url = $Collector->getUrl();
       }
 
       $memes    = $Collector->getMemes($url);                                   // Uses Curl to get the API information
