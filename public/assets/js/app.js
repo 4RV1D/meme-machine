@@ -1,46 +1,30 @@
-(function($){
-	$.fn.loaddata = function(options) {// Settings
-		var settings = $.extend({
-			loading_gif_url	: "ajax-loader.gif", //url to loading gif
-			end_record_text	: 'No more records found!', //no more records to load
-			data_url 		: 'getPosts.php', //url to PHP page
-			start_page 		: 1 //initial page
-		}, options);
+$(document).ready(function(){
 
-		var el = this;
-		loading  = false;
-		end_record = false;
-		contents(el, settings); //initial data load
+			$( '#memes' ).scrollLoad({
 
-		$(window).scroll(function() { //detact scroll
-			if($(window).scrollTop() + $(window).height() >= $(document).height()){ //scrolled to bottom of the page
-				contents(el, settings); //load content chunk
-			}
-		});
-	};
-	//Ajax load function
-	function contents(el, settings){
-		var load_img = $('<img/>').attr('src',settings.loading_gif_url).addClass('loading-image'); //create load image
-		var record_end_txt = $('<div/>').text(settings.end_record_text).addClass('end-record-info'); //end record text
+				url : '/memes', //your ajax file to be loaded when scroll breaks ScrollAfterHeight
 
-		if(loading == false && end_record == false){
-			loading = true; //set loading flag on
-			el.append(load_img); //append loading image
-			$.post( settings.data_url, {'page': settings.start_page}, function(data){ //jQuery Ajax post
-				if(data.trim().length == 0){ //no more records
-					el.append(record_end_txt); //show end record text
-					load_img.remove(); //remove loading img
-					end_record = true; //set end record flag on
-					return; //exit
+				getData : function() {
+					//you can post some data along with ajax request
+				},
+
+				start : function() {
+					$('<div class="loading"><img src="ajax-loader.gif"/></div>').appendTo(this); // you can add your effect before loading data
+				},
+
+				ScrollAfterHeight : 95,			//this is the height in percentage after which ajax stars
+
+				onload : function( data ) {
+					$(this).append( data );
+					$('.loading').remove();
+				}, // this event fires on ajax success
+
+				continueWhile : function( resp ) {
+					if( $(this).children('li').length >= 100 ) { // stops when number of 'li' reaches 100
+						return false;
+					}
+					return true;
 				}
-				loading = false;  //set loading flag off
-				load_img.remove(); //remove loading img
-				el.append(data);  //append content
-				settings.start_page ++; //page increment
-			})
-		}
-	}
+			});
 
-})(jQuery);
-
-$("#results").loaddata();
+		});

@@ -1,21 +1,8 @@
 <?php
 
-  use App\Models\Memes;
+  $container["HomeController"] = function($container) {
+    return new \App\Controllers\HomeController($container);
+  };
 
-  $app->get('/', function ($request, $response) {
-
-    $memes = Memes::all();
-
-    return $this->view->render($response, 'home.twig', [
-      'memes' => $memes
-    ]);
-
-  })->setName('home');
-
-  /*$app->get('/hello/{name}', function ($request, $response, $args) {
-
-    return $this->view->render($response, 'profile.html', [
-      'name' => $args['name']
-    ]);
-
-  })->setName('profile');*/
+  $app->get('/', 'HomeController:index')->setName('home');
+  $app->get('/memes', 'HomeController:getMemes')->setName('memes');

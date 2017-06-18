@@ -1,6 +1,8 @@
 <?php
 
-  require '../vendor/autoload.php';
+  session_start();
+
+  require __DIR__."/../vendor/autoload.php";
 
   $app = new \Slim\App([
     'settings' => [
@@ -47,4 +49,4 @@
 
   };
 
-  require 'routes.php';
+  require __DIR__."/routes.php";

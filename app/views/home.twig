@@ -1,5 +1,35 @@
-<h1>Home</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Meme Machine</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+  </head>
+  <body>
 
-{% for meme in memes %}
-    <p>{{ meme.id }}</p>
-{% endfor %}
+    <main>
+      <div class="wrapper">
+        <div id="memes">
+          <!--{% for meme in memes %}
+              <div class="meme">
+
+                {% if meme.message != "" %}
+                  <p>{{ meme.message }}</p>
+                {% endif %}
+
+                <img src="{{ meme.full_picture }}"/>
+              </div>
+          {% endfor %}-->
+        </div>
+      </div>
+    </main>
+
+
+    <footer>
+      <h1>Yooooo!</h1>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
