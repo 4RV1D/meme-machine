@@ -19,14 +19,4 @@ class HomeController extends Controller
     ]);
   }
 
-  public function getMemes($request, $response) {
-    $memes = Memes::all();
-
-    foreach ($memes as $meme) {
-      echo '<div class="meme">';
-      if ($meme->message != "") {echo '<p>' . $meme->message . '</p>';}
-      echo '<img src="' . $meme->full_picture . '"/></div>';
-    }
-  }
-
 }
