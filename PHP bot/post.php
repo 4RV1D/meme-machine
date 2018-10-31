@@ -7,8 +7,8 @@ use Facebook\FacebookRequest;
 use Facebook\GraphUser;
 use Facebook\FacebookRequestException;
 
-$appId      = "1875750035976215";
-$appSecret  = "76680e27408308261ec627917d085465";
+$appId      = "";
+$appSecret  = "";
 
 $fb = new Facebook\Facebook([
   'app_id' => $appId,
